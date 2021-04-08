@@ -1,7 +1,7 @@
 <template>
   <div id="task" class="left-align">
     <h2 class="left-align">命名实体识别</h2>
-    <hr />
+    <el-divider></el-divider>
     <p class="norm-margin">
       采用allennlp scispacy搭建的生物化学物质命名实体识别工具，可识别的种类包括:
     </p>
@@ -92,10 +92,10 @@ export default {
       let data = {
         "mode": "simple",
         "text": this.inputText
-      }
+      };
       nerSubmit(data).then(response => {
         this.outputJSON = response.data;
-      })
+      });
     }
   }
 }
