@@ -19,14 +19,15 @@
       </el-input>
       <el-button @click="search" type="primary" class="small-margin">检索</el-button>
     </el-card>
-    <el-divider></el-divider>
+    <el-divider v-if="searchResult" content-position="left">文章列表</el-divider>
     <ArticleResult v-for="article in searchResult" :result="article.article" class="norm-margin"></ArticleResult>
+    <el-divider v-if="labelResult" content-position="left">标记结果</el-divider>
   </div>
 </template>
 
 <script>
 import ArticleResult from "./ArticleResult.vue";
-import {searchArticle} from "../api/api.js"
+import {searchArticle, labelPdf} from "../api/api.js"
 
 export default {
   components: {
@@ -36,7 +37,9 @@ export default {
   data() {
     return {
       inputText: "",
-      searchResult: null
+      searchResult: null,
+      inputSmb: "",
+      labelResult: null
     }
   },
   methods: {
@@ -47,6 +50,14 @@ export default {
       };
       searchArticle(data).then(response => {
         this.searchResult = response.data;
+      });
+    },
+    labeling() {
+      let data = {
+        smb: this.inputSmb
+      };
+      labelPdf(data).then(response => {
+        this.labelResult = response.data;
       });
     }
   }
