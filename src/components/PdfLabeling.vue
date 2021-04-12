@@ -27,7 +27,7 @@
 
 <script>
 import ArticleResult from "./ArticleResult.vue";
-import {searchArticle, labelPdf} from "../api/api.js"
+import {searchArticle, labelPdf} from "../api/api.js";
 
 export default {
   components: {
