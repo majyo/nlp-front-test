@@ -22,16 +22,18 @@
     <el-divider v-if="searchResult" content-position="left">文章列表</el-divider>
     <ArticleResult v-for="article in searchResult" :result="article.article" @labelText="labeling" class="norm-margin"></ArticleResult>
     <el-divider v-if="labelResult" content-position="left">标记结果</el-divider>
+    <LabelResult v-if="labelResult" :result="labelResult"></LabelResult>
   </div>
 </template>
 
 <script>
 import ArticleResult from "./ArticleResult.vue";
+import LabelResult from "./LabelResult.vue";
 import {searchArticle, labelPdf} from "../api/api.js";
 
 export default {
   components: {
-    ArticleResult
+    ArticleResult, LabelResult
   },
   name: "PdfLabeling",
   data() {
