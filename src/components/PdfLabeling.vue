@@ -20,7 +20,7 @@
       <el-button @click="search" type="primary" class="small-margin">检索</el-button>
     </el-card>
     <el-divider v-if="searchResult" content-position="left">文章列表</el-divider>
-    <ArticleResult v-for="article in searchResult" :result="article.article" class="norm-margin"></ArticleResult>
+    <ArticleResult v-for="article in searchResult" :result="article.article" @labelText="labeling" class="norm-margin"></ArticleResult>
     <el-divider v-if="labelResult" content-position="left">标记结果</el-divider>
   </div>
 </template>
@@ -52,11 +52,12 @@ export default {
         this.searchResult = response.data;
       });
     },
-    labeling() {
-      let data = {
+    labeling(data) {
+      this.inputSmb = data;
+      let jsonData = {
         smb: this.inputSmb
       };
-      labelPdf(data).then(response => {
+      labelPdf(jsonData).then(response => {
         this.labelResult = response.data;
       });
     }
