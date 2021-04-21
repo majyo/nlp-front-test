@@ -26,6 +26,17 @@ export default {
 
 <style scoped>
 .title {
-  font-size: x-large;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.abstract {
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.subtitle {
+  font-size: 18px;
 }
 </style>
