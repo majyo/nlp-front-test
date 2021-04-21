@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="content">
+  <div v-loading="loading" class="content">
     <p class="title">An annotated corpus with nanomedicine and pharmacokinetic parameters</p>
     <p class="abstract">A vast amount of data on nanomedicines is being generated and published, and natural
       language processing (NLP) approaches can automate the extraction of unstructured text-based
@@ -49,31 +49,36 @@
         and biologic response in addition to description information.
         A complete list of these entities is shown in Table 2.</p>
   </div>
-  <el-table
-      v-loading="loading"
-      :data="tableData"
-      style="width: 100%">
-    <el-table-column
-        prop="date"
-        label="日期"
-        width="180">
-    </el-table-column>
-    <el-table-column
-        prop="name"
-        label="姓名"
-        width="180">
-    </el-table-column>
-    <el-table-column
-        prop="address"
-        label="地址">
-    </el-table-column>
-  </el-table>
+<!--  <el-table-->
+<!--      v-loading="loading"-->
+<!--      :data="tableData"-->
+<!--      style="width: 100%">-->
+<!--    <el-table-column-->
+<!--        prop="date"-->
+<!--        label="日期"-->
+<!--        width="180">-->
+<!--    </el-table-column>-->
+<!--    <el-table-column-->
+<!--        prop="name"-->
+<!--        label="姓名"-->
+<!--        width="180">-->
+<!--    </el-table-column>-->
+<!--    <el-table-column-->
+<!--        prop="address"-->
+<!--        label="地址">-->
+<!--    </el-table-column>-->
+<!--  </el-table>-->
   <el-button type="primary" @click="changeLoading">buttonCont</el-button>
   <el-button
       type="primary"
       @click="openFullScreen1"
       v-loading.fullscreen.lock="fullscreenLoading">
     指令方式
+  </el-button>
+  <el-button
+      type="primary"
+      @click="openFullScreen2">
+    服务方式
   </el-button>
 </div>
 </template>
@@ -105,6 +110,17 @@ export default {
       this.fullscreenLoading = true;
       setTimeout(() => {
         this.fullscreenLoading = false;
+      }, 2000);
+    },
+    openFullScreen2() {
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      setTimeout(() => {
+        loading.close();
       }, 2000);
     },
     changeLoading() {

@@ -1,5 +1,5 @@
 <template>
-  <div id="task2" class="left-align">
+  <div id="task2" class="left-align" v-loading="loading">
     <h2 class="left-align">文献在线检索与标注</h2>
     <el-divider></el-divider>
     <p class="norm-margin">
@@ -42,14 +42,14 @@ export default {
       searchResult: null,
       inputSmb: "",
       labelResult: null,
-      fullscreenLoading: false
+      loading: false
     }
   },
   methods: {
-    openFullScreenLoading() {
-      this.fullscreenLoading = true;
+    openLoading() {
+      this.loading = true;
       setTimeout(() => {
-        this.fullscreenLoading = false;
+        this.loading = false;
       }, 50000);
     },
     search() {
@@ -67,10 +67,10 @@ export default {
         smb: this.inputSmb
       };
 
-      this.openFullScreenLoading();
+      this.openLoading();
 
       labelPdf(jsonData).then(response => {
-        this.fullscreenLoading = false;
+        this.loading = false;
         this.labelResult = response.data;
       });
     }
