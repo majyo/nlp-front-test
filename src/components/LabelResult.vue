@@ -25,5 +25,7 @@ export default {
 </script>
 
 <style scoped>
-
+.title {
+  font-size: x-large;
+}
 </style>

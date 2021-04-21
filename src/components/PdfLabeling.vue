@@ -41,10 +41,17 @@ export default {
       inputText: "",
       searchResult: null,
       inputSmb: "",
-      labelResult: null
+      labelResult: null,
+      fullscreenLoading: false
     }
   },
   methods: {
+    openFullScreenLoading() {
+      this.fullscreenLoading = true;
+      setTimeout(() => {
+        this.fullscreenLoading = false;
+      }, 50000);
+    },
     search() {
       let data = {
         title: this.inputText,
@@ -59,7 +66,11 @@ export default {
       let jsonData = {
         smb: this.inputSmb
       };
+
+      this.openFullScreenLoading();
+
       labelPdf(jsonData).then(response => {
+        this.fullscreenLoading = false;
         this.labelResult = response.data;
       });
     }

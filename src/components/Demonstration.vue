@@ -3,6 +3,7 @@
     <el-tabs :tab-position="tabPosition">
       <el-tab-pane label="命名实体识别"><Ner></Ner></el-tab-pane>
       <el-tab-pane label="文献在线标注"><PdfLabeling></PdfLabeling></el-tab-pane>
+      <el-tab-pane label="测试"><TestPage></TestPage></el-tab-pane>
       <el-tab-pane label="未开放">未开放</el-tab-pane>
     </el-tabs>
   </div>
@@ -11,10 +12,11 @@
 <script>
 import Ner from './Ner.vue';
 import PdfLabeling from "./PdfLabeling.vue";
+import TestPage from "./TestPage.vue";
 
 export default {
   components: {
-    Ner, PdfLabeling
+    Ner, PdfLabeling, TestPage
   },
   name: "Demonstration",
   data() {
