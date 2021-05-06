@@ -4,7 +4,13 @@
 
 <script>
 export default {
-name: "DygieResult"
+  name: "DygieResult",
+  props: {
+    result: {
+      required: true,
+      type: Object
+    }
+  }
 }
 </script>
 
