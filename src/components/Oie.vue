@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import {oieRequest} from "../api/allenApi";
+import {oieRequest} from "../api/allenApi.js";
 
 export default {
   name: "Oie",

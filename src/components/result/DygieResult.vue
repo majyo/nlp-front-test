@@ -2,7 +2,7 @@
   <div class="result">
     <span v-for="word in fields.sentences">
       <span v-if="word.entity==='[OTHER]'">{{word.text}}&nbsp;</span>
-      <el-tag v-else class="entity" type="success">{{word.text}}<span class="type">{{word.entity}}</span></el-tag>
+      <el-tag v-else class="entity" type="success">{{word.text}} <span class="type">{{word.entity}}</span></el-tag>
     </span>
   </div>
 </template>
@@ -46,6 +46,31 @@ export default {
         };
       }
 
+      function mergeWords(words_obj) {
+        let label = "";
+        let result = {};
+        let result_list = [];
+        for (let x = 0; x < words_obj.length; x++) {
+          let word_obj = words_obj[x];
+          if (word_obj["entity"] !== label) {
+            if (Object.keys(result).length !== 0) {
+              result["text"] = result["text"].join(" ");
+              result_list.push(result);
+              // console.log(result);
+              // console.log(result["text"] instanceof Array);
+            }
+            result = {
+              "text": [word_obj["text"]],
+              "entity": word_obj["entity"]
+            };
+            label = word_obj["entity"];
+          } else {
+            result["text"].push(word_obj["text"]);
+          }
+        }
+        return result_list
+      }
+
       let sentences = list_concat(doc_json["sentences"]);
       let ner_label = list_concat(doc_json["ner"]);
       let relation_label = list_concat(doc_json["relations"]);
@@ -77,8 +102,10 @@ export default {
         });
       }
 
+      let merged_obj = mergeWords(sentences_obj);
+
       return {
-        "sentences": sentences_obj,
+        "sentences": merged_obj,
         "relations": relations
       };
     }

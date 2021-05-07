@@ -5,7 +5,7 @@
       <el-tab-pane label="文献在线标注"><PdfLabeling></PdfLabeling></el-tab-pane>
       <el-tab-pane label="开放信息抽取">未开放</el-tab-pane>
       <el-tab-pane label="语言模型">未开放</el-tab-pane>
-      <el-tab-pane label="信息抽取">未开放</el-tab-pane>
+      <el-tab-pane label="信息抽取"><Dygie></Dygie></el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -14,10 +14,11 @@
 import Ner from './Ner.vue';
 import PdfLabeling from "./PdfLabeling.vue";
 import TestPage from "./TestPage.vue";
+import Dygie from "./Dygie.vue";
 
 export default {
   components: {
-    Ner, PdfLabeling, TestPage
+    Ner, PdfLabeling, TestPage, Dygie
   },
   name: "Demonstration",
   data() {
