@@ -28,11 +28,18 @@
       </el-input>
       <el-button @click="submit" type="primary" class="small-margin">运行</el-button>
     </el-card>
+    <DygieResult class="norm-margin" :result="outputJSON"></DygieResult>
   </div>
 </template>
 
 <script>
+import DygieResult from "./result/DygieResult";
+import {dygieRequest} from "../api/allenApi";
+
 export default {
+  components: {
+    DygieResult
+  },
   name: "Dygie",
   data() {
     return {
@@ -58,8 +65,10 @@ export default {
     submit() {
       let data = {
         text: this.inputText
-      }
-      // TODO: add implement
+      };
+      dygieRequest(data).then(response => {
+        this.outputJSON = response.data;
+      });
     }
   }
 }

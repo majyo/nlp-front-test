@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import {oieRequest} from "../api/allenApi";
+
 export default {
   name: "Oie",
   data() {
@@ -58,8 +60,10 @@ export default {
     submit() {
       let data = {
         sentence: this.inputText
-      }
-      // TODO: add implement
+      };
+      oieRequest(data).then(response => {
+        this.outputJSON = response.data;
+      });
     }
   }
 }
