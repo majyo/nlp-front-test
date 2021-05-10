@@ -72,8 +72,8 @@ export default {
       }
 
       let sentences = list_concat(doc_json["sentences"]);
-      let ner_label = list_concat(doc_json["ner"]);
-      let relation_label = list_concat(doc_json["relations"]);
+      let ner_label = list_concat(doc_json["predicted_ner"]);
+      let relation_label = list_concat(doc_json["predicted_relations"]);
 
       sentences = sentences.map(token2word);
 
