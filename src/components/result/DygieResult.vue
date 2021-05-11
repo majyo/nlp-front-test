@@ -1,9 +1,29 @@
 <template>
   <div class="result">
-    <span v-for="word in fields.sentences">
-      <span v-if="word.entity==='[OTHER]'">{{word.text}}&nbsp;</span>
-      <el-tag v-else class="entity" type="success">{{word.text}} <span class="type">{{word.entity}}</span></el-tag>
-    </span>
+    <div>
+      <p>Entities:</p>
+      <span v-for="word in fields.sentences">
+        <span v-if="word.entity==='[OTHER]'">{{word.text}}&nbsp;</span>
+        <el-tag v-else class="entity" type="success">{{word.text}} <span class="type">{{word.entity}}</span></el-tag>
+      </span>
+    </div>
+    <div>
+      <p>Relations:</p>
+      <div v-for="relation in fields.relations">
+        <span>Source: </span>
+        <el-tag class="small-margin">{{relation.source}}</el-tag>
+        <span>Target: </span>
+        <el-tag type="success" class="small-margin">{{relation.target}}</el-tag>
+        <span>Relation: </span>
+        <el-tag type="danger" class="small-margin">{{relation.relation}}</el-tag>
+      </div>
+    </div>
+    <div>
+      <p>Clusters:</p>
+      <div v-for="cluster in fields.clusters">
+        <el-tag v-for="entity in cluster" class="small-margin">{{entity}}</el-tag>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -93,8 +113,15 @@ export default {
 
       for (let x = 0; x < relation_label.length; x++) {
         let relation = relation_label[x];
-        let label1 = sentences_obj[relation[0]]["entity"];
-        let label2 = sentences_obj[relation[2]]["entity"];
+        let index1 = relation[0];
+        let index2 = relation[1];
+        let index3 = relation[2];
+        let index4 = relation[3];
+
+        let label1 = sentences.slice(index1, index2 + 1).join(" ");
+        let label2 = sentences.slice(index3, index4 + 1).join(" ");
+        // let label1 = sentences_obj[relation[0]]["entity"];
+        // let label2 = sentences_obj[relation[2]]["entity"];
         relations.push({
           "source": label1,
           "target": label2,
@@ -104,9 +131,21 @@ export default {
 
       let merged_obj = mergeWords(sentences_obj);
 
+      function index2word(x) {
+        return sentences.slice(x[0], x[1] + 1).join(" ");
+      }
+
+      let clusters = [];
+
+      for (let x = 0; x < doc_json["predicted_clusters"].length; x++) {
+        let gruop = doc_json["predicted_clusters"][x];
+        clusters.push(gruop.map(index2word));
+      }
+
       return {
         "sentences": merged_obj,
-        "relations": relations
+        "relations": relations,
+        "clusters": clusters
       };
     }
   }
@@ -129,5 +168,10 @@ export default {
   color: #7277ff;
   font-weight: bold;
   font-size: 12px;
+}
+
+.small-margin {
+  margin-left: 5px;
+  margin-right: 10px;
 }
 </style>

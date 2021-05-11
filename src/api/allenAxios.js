@@ -1,12 +1,14 @@
 import axios from "axios";
 
 const allen = axios.create({
-    baseURL: "//192.168.40.7:8101",
+    // baseURL: "//192.168.40.7:8101",
+    baseURL: "//127.0.0.1:8101",
     timeout: 30000
 });
 
 const dygie = axios.create({
-    baseURL: "//192.168.40.7:8102",
+    // baseURL: "//192.168.40.7:8102",
+    baseURL: "//127.0.0.1:8102",
     timeout: 30000
 });
 
