@@ -16,10 +16,11 @@ import Ner from './Ner.vue';
 import PdfLabeling from "./PdfLabeling.vue";
 import TestPage from "./TestPage.vue";
 import Dygie from "./Dygie.vue";
+import TextLabeling from "./TextLabeling.vue";
 
 export default {
   components: {
-    Ner, PdfLabeling, TestPage, Dygie
+    Ner, PdfLabeling, TestPage, Dygie, TextLabeling
   },
   name: "Demonstration",
   data() {
