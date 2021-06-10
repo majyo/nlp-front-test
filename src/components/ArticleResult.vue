@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     sendSmb() {
-      this.$emit('labelText', this.result['smb']);
+      this.$emit('labelText', this.result['api']);
     }
   }
 }

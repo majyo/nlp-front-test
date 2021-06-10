@@ -3,7 +3,7 @@
     <h2 class="left-align">文本分类</h2>
     <el-divider></el-divider>
     <p class="norm-margin">
-      使用文献名在线检索文献，并使用allennlp scispacy工具对文献正文进行在线标注。
+      使用文献名在线检索文献，并对文本进行分类。
     </p>
     <p class="norm-margin">
       在文本输入框中输入检索关键字，之后点击检索获取标题中带有检索关键字的文献。
@@ -22,14 +22,15 @@
     <el-divider v-if="searchResult" content-position="left">文章列表</el-divider>
     <ArticleResult v-for="article in searchResult" :result="article.article" @labelText="labeling" class="norm-margin"></ArticleResult>
     <el-divider v-if="labelResult" content-position="left">标记结果</el-divider>
-    <LabelResult v-for="article in labelResult" :result="article"></LabelResult>
+    <TextLabelResult v-for="article in labelResult" :result="article"></TextLabelResult>
   </div>
 </template>
 
 <script>
 import ArticleResult from "./ArticleResult.vue";
 import LabelResult from "./LabelResult.vue";
-import {searchArticle, searchProteinArticle, labelPdf} from "../api/api.js";
+import TextLabelResult from "./TextLabelResult.vue";
+import {searchArticle, searchProteinArticle, labelPdf, textClassification} from "../api/api.js";
 
 export default {
   components: {
@@ -62,14 +63,14 @@ export default {
       });
     },
     labeling(data) {
-      this.inputSmb = data;
+      this.inputUrl = data;
       let jsonData = {
-        smb: this.inputSmb
+        smb: this.inputUrl
       };
 
       this.openLoading();
 
-      labelPdf(jsonData).then(response => {
+      textClassification(jsonData).then(response => {
         this.loading = false;
         this.labelResult = response.data;
       });
