@@ -20,7 +20,7 @@
       <el-button @click="search" type="primary" class="small-margin">检索</el-button>
     </el-card>
     <el-divider v-if="searchResult" content-position="left">文章列表</el-divider>
-    <ArticleResult v-for="article in searchResult" :result="article.article" @labelText="labeling" class="norm-margin"></ArticleResult>
+    <ArticleResult v-for="article in searchResult['ArticleList']" :result="article.article" @labelText="labeling" class="norm-margin"></ArticleResult>
     <el-divider v-if="labelResult" content-position="left">标记结果</el-divider>
     <TextLabelResult v-for="article in labelResult" :result="article"></TextLabelResult>
   </div>

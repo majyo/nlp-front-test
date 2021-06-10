@@ -8,7 +8,7 @@
       <p class="title">{{result["title"]}}</p>
       <el-divider></el-divider>
       <p>{{result["authors"].join(", ")}}</p>
-      <p>{{result["journal"]}}</p>
+<!--      <p>{{result["journal"]}}</p>-->
       <p>{{result["year"]}}</p>
     </div>
   </el-card>
