@@ -34,7 +34,7 @@ import {searchArticle, searchProteinArticle, labelPdf, textClassification} from 
 
 export default {
   components: {
-    ArticleResult, LabelResult
+    ArticleResult, LabelResult, TextLabelResult
   },
   name: "PdfLabeling",
   data() {
@@ -60,6 +60,7 @@ export default {
       };
       searchProteinArticle(data).then(response => {
         this.searchResult = response.data;
+        console.log(this.searchResult);
       });
     },
     labeling(data) {
